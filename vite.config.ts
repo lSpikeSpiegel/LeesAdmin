@@ -8,6 +8,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base:'/LeesAdmin/',
   // 插件配置
   plugins: [
     vue(),
