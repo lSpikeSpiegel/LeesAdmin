@@ -1,23 +1,25 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted } from 'vue'
-import { zhCN, dateZhCN, darkTheme, useLoadingBar } from 'naive-ui'
-import { useMainStore } from './store/index'
+import { computed, ref } from 'vue'
+import { useMainStore } from '@/store'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+import en from 'element-plus/dist/locale/en.mjs'
+import { useRouter } from 'vue-router'
 
-const mainStore = useMainStore()
-const getDarkTheme = computed(() => (mainStore.isDark ? darkTheme : undefined))
-const isLock = computed(() => mainStore.isLock)
-
+const store = useMainStore()
+const router = useRouter()
+const locale = computed(() => (store.locale === 'zh-cn' ? zhCn : en))
+const routeName = computed(() => {
+  return router.currentRoute.value
+})
 </script>
 
 <template>
-  <NConfigProvider
-    v-if="!isLock"
-    :locale="zhCN"
-    :theme="getDarkTheme"
-    :date-locale="dateZhCN"
-  >
-    <router-view />
-  </NConfigProvider>
+  <el-config-provider :locale="locale">
+    <router-view v-slot="{ Component }">
+      <keep-alive v-if="store.keepAlivePages[routeName]">
+        <component :is="Component" />
+      </keep-alive>
+      <component v-else :is="Component" />
+    </router-view>
+  </el-config-provider>
 </template>
-
-<style></style>

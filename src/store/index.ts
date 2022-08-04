@@ -1,20 +1,24 @@
 import { defineStore } from 'pinia'
 
 export const useMainStore = defineStore({
-    id: 'mian',
+    id: 'main',
     state: () => ({
-        name: '超级管理员',
+        locale: localStorage.getItem('lang') || 'zh-cn',
+        theme: localStorage.getItem('theme') === 'true',
+        keepAlivePages: { index: true },
         isDark: false,
         isLock: false,
     }),
     getters: {
-        nameLength: (state) => state.name.length,
     },
-    actions: {
-        async insertPost(data: string) {
-            // 可以做异步
-            // await doAjaxRequest(data);
-            this.name = data;
+    actions: { // 支持异步
+        changeLocale(value: string) {
+            localStorage.setItem('lang', value)
+            this.locale = value;
+        },
+        changeTheme(value: boolean) {
+            localStorage.setItem('theme', JSON.stringify(value))
+            this.theme = value;
         }
     },
 })

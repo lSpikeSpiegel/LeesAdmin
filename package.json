@@ -12,14 +12,21 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.6",
     "axios": "^0.27.2",
-    "naive-ui": "^2.31.0",
+    "css-vars-ponyfill": "^2.4.8",
+    "echarts": "^5.3.3",
+    "element-plus": "^2.2.12",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.0-rc.10",
+    "postcss-px-to-viewport": "^1.1.1",
     "unplugin-vue-components": "^0.21.1",
     "vfonts": "^0.0.3",
     "vue": "^3.2.25",
-    "vue-router": "^4"
+    "vue-i18n": "^9.2.0",
+    "vue-router": "^4",
+    "vuedraggable": "^2.24.3",
+    "vuescroll": "^4.17.5"
   },
   "devDependencies": {
     "@types/nprogress": "^0.2.0",
@@ -49,6 +56,10 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,vue,ts,tsx}": ["yarn lint", "prettier --write", "git add"]
+    "*.{js,jsx,vue,ts,tsx}": [
+      "yarn lint",
+      "prettier --write",
+      "git add"
+    ]
   }
 }

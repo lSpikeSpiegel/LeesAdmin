@@ -1,8 +1,4 @@
-<template>
-  <div>{{ '名称：' + mainStore.name }}</div>
-  <div>{{ '名称长度：' + mainStore.nameLength }}</div>
-  <n-button @click="changeTheme">naive-ui</n-button>
-</template>
+<template> </template>
 
 <script setup lang="ts">
 import { useMainStore } from '@/store/index'
