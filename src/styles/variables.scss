@@ -1,0 +1,17 @@
+$danger: #ff6464;
+$highlight: #39fff2;
+$warning: #c7a85b;
+$primary: #5eb5ff;
+$info: #dcdfe6;
+$primary-color: var(--el-color-primary);
+
+$bgc: var(--theme-bg);
+$hBgc: var(--theme-hover-bg);
+$color: var(--theme-color);
+$hColor: var(--theme-hover-color);
+$aColor: var(--theme-active-color);
+$border: var(--theme-border-color);
+
+li {
+  list-style: none;
+}

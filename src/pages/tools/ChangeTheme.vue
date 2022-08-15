@@ -9,10 +9,10 @@
 </template>
 <script lang="ts" setup>
 import { computed, onMounted } from 'vue'
-import { useMainStore } from '@/store'
+import { GlobalStore } from '@/store'
 import { setTheme } from '@/utils/theme'
 
-const store = useMainStore()
+const store = GlobalStore()
 
 const theme = computed({
   get: function () {
@@ -47,22 +47,22 @@ onMounted(() => {
   height: 30px;
   padding: 0 2px;
   border-radius: 30px;
-  background-color: $Bg;
-  color: $Color;
-  border: 1px solid $Color;
+  background-color: $bgc;
+  color: $color;
+  border: 1px solid $color;
   @include flexbox(row, nowrap, flex-start, center);
   &.is-checked {
     @include flexbox(row, nowrap, flex-end, center);
   }
   .slider {
     text-align: center;
-    color: $Bg;
+    color: $bgc;
     padding: 2px;
     font-size: 20px;
     width: 25px;
     height: 25px;
     border-radius: 100%;
-    background-color: $Color;
+    background-color: $color;
     svg: {
       width: 100%;
       height: 100%;

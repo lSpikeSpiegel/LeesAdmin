@@ -1,30 +1,49 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import router from "@/router/router";
+import NProgress from "@/config/nprogress";
+import { HOME_URL } from "@/config/config";
+import { AuthStore } from "@/store/modules/auth";
+import { GlobalStore } from "@/store";
+import { AxiosCanceler } from "@/api/helper/axiosCancel";
 
+const axiosCanceler = new AxiosCanceler();
 
-export const DynamicRoutes: RouteRecordRaw[] = [{
-    path: '/Login',
-    name: 'Login',
-    component: () => import('@/pages/login/Login.vue'), // 注意这里要带上 文件后缀.vue
-}]
-export const IndexRoute: RouteRecordRaw = {
-    path: '/',
-    name: 'index',
-    component: () => import('@/pages/index.vue'), // 注意这里要带上 文件后缀.vue
-}
+/**
+ * @description 路由拦截 beforeEach
+ * */
+router.beforeEach((to, from, next) => {
+    NProgress.start();
+    // * 在跳转路由之前，清除所有的请求
+    axiosCanceler.removeAllPending();
 
+    // * 判断当前路由是否需要访问权限
+    if (!to.matched.some(record => record.meta.requiresAuth)) return next();
 
+    // * 判断是否有Token
+    const globalStore = GlobalStore();
+    if (!globalStore.token) {
+        next({
+            path: "/login"
+        });
+        NProgress.done();
+        return;
+    }
 
-const routes: RouteRecordRaw[] = [IndexRoute]
+    const authStore = AuthStore();
+    // * Dynamic Router(动态路由，根据后端返回的菜单数据生成的一维数组)
+    const dynamicRouter = authStore.dynamicRouter;
+    // * Static Router(静态路由，必须配置首页地址，否则不能进首页获取菜单、按钮权限等数据)，获取数据的时候会loading，所有配置首页地址也没问题
+    const staticRouter = [HOME_URL, "/403"];
+    const routerList = dynamicRouter.concat(staticRouter);
 
-const router = createRouter({
-    history: createWebHashHistory(),
-    routes,
-})
+    // * 如果访问的地址没有在路由表中重定向到403页面
+    if (routerList.indexOf(to.path) !== -1) return next();
+    next({
+        path: "/403"
+    });
+});
 
-export function setNewRoute() {
-    DynamicRoutes.forEach(i => {
-        router.addRoute(i)
-    })
-}
+router.afterEach(() => {
+    NProgress.done();
+});
 
-export default router
+export default router;

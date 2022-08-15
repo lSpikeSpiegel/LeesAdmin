@@ -1,0 +1,20 @@
+@mixin flex($direction: row, $wrap: nowrap, $justify: flex-start, $align: stretch, $display: flex) {
+	display: $display;
+	flex-flow: $direction $wrap;
+	justify-content: $justify;
+	align-items: $align;
+}
+
+@mixin centerFlex($direction: row, $wrap: nowrap, $display: flex) {
+	display: $display;
+	flex-flow: $direction $wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin bgi($url, $posL: 100%, $posR: 100%, $size: 100%) {
+	background-image: url($url);
+	background-position: $posL $posR;
+	background-size: $size $size;
+	background-repeat: no-repeat;
+}

@@ -1,18 +1,19 @@
 <template>
   <layout-header />
+  <work-list />
 </template>
 
 <script lang="ts" setup>
-import layoutHeader from './layout/header.vue'
-import ChangeTheme from './tools/ChangeTheme.vue'
+import LayoutHeader from './layout/header.vue'
+import WorkList from './layout/WorkListWrapper.vue'
 </script>
 
 <style lang="scss" scoped>
 .box {
   width: 200px;
   height: 200px;
-  background-color: $Bg;
-  color: $Color;
-  border: 1px solid $Border;
+  background-color: $bgc;
+  color: $color;
+  border: 1px solid $border;
 }
 </style>

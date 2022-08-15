@@ -1,0 +1,153 @@
+/* 自定义 element 暗黑模式样式 */
+html.dark {
+  // * lees-admin
+  --lees-login-shadow-light: 5px 5px 15px rgb(255 255 255 / 20%);
+  --lees-box-shadow-light: 0 0 10px rgb(255 255 255 / 10%);
+  --lees-border-light: 1px solid #4c4c4d;
+  --lees-main-bg-color: #0d0d0d;
+  --lees-popup-color: #060708;
+
+  // * wangEditor
+  --w-e-textarea-bg-color: #1b1b1b;
+  --w-e-textarea-color: #eeeeee;
+
+  // * 以下为自定义暗黑模式内容
+  // login
+  .login-container {
+    background-color: var(--el-fill-color-extra-light) !important;
+    .login-box {
+      background-color: var(--el-mask-color) !important;
+      .login-form {
+        background-color: var(--el-bg-color) !important;
+        box-shadow: var(--lees-login-shadow-light) !important;
+        .logo-text {
+          color: var(--el-text-color-primary) !important;
+        }
+      }
+    }
+  }
+
+  // scroll-bar
+  ::-webkit-scrollbar {
+    background-color: var(--el-scrollbar-bg-color) !important;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--el-border-color-darker);
+  }
+
+  // content-box
+  .content-box {
+    .text {
+      color: var(--el-text-color-regular) !important;
+    }
+  }
+
+  // dataVisualize-box
+  .dataVisualize-box {
+    .top-box,
+    .bottom-box {
+      box-shadow: var(--lees-box-shadow-light) !important;
+    }
+  }
+
+  // error-message
+  .not-container {
+    .not-detail {
+      h2 {
+        color: var(--el-text-color-primary) !important;
+      }
+    }
+  }
+
+  // el-table
+  .table-box {
+    .el-table {
+      .el-table__header th {
+        color: var(--el-text-color-regular) !important;
+        background-color: var(--el-bg-color) !important;
+      }
+    }
+  }
+
+  // el-drawer
+  .el-drawer {
+    .el-drawer__header {
+      border-bottom: var(--lees-border-light) !important;
+      span {
+        color: var(--el-text-color-primary) !important;
+      }
+    }
+    .el-drawer__footer {
+      border-top: var(--lees-border-light) !important;
+    }
+  }
+
+  //  el-dialog
+  .el-dialog {
+    .el-dialog__header {
+      border-bottom: var(--lees-border-light) !important;
+    }
+  }
+
+  // layout
+  .el-container {
+    .el-aside {
+      .menu {
+        background-color: var(--el-bg-color) !important;
+        border-right: var(--lees-border-light) !important;
+        .logo {
+          border-bottom: var(--lees-border-light) !important;
+        }
+        .el-menu,
+        .el-sub-menu,
+        .el-sub-menu__title {
+          background-color: var(--el-bg-color) !important;
+        }
+      }
+    }
+    .el-header {
+      .header {
+        background-color: var(--el-bg-color) !important;
+        border-bottom-color: var(--el-border-color-light) !important;
+        .header-ri {
+          .icon-style {
+            color: var(--el-text-color-regular) !important;
+          }
+          .username {
+            color: var(--el-text-color-regular) !important;
+          }
+        }
+      }
+    }
+    .el-main {
+      background-color: var(--lees-main-bg-color) !important;
+      .main-box {
+        background-color: var(--el-bg-color) !important;
+      }
+    }
+    .el-tabs {
+      background-color: var(--el-bg-color) !important;
+    }
+    .el-footer {
+      .footer {
+        background-color: var(--el-bg-color) !important;
+        border-top-color: var(--el-border-color-light) !important;
+        a {
+          color: var(--el-text-color-regular) !important;
+        }
+      }
+    }
+  }
+
+  // menu-popup
+  .el-menu--popup-container {
+    .el-menu {
+      background-color: var(--el-bg-color) !important;
+    }
+  }
+
+  // guide
+  #driver-highlighted-element-stage {
+    background-color: var(--el-color-info-light-5) !important;
+  }
+}

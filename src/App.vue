@@ -1,25 +1,34 @@
-<script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useMainStore } from '@/store'
-import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-import en from 'element-plus/dist/locale/en.mjs'
-import { useRouter } from 'vue-router'
-
-const store = useMainStore()
-const router = useRouter()
-const locale = computed(() => (store.locale === 'zh-cn' ? zhCn : en))
-const routeName = computed(() => {
-  return router.currentRoute.value
-})
-</script>
-
 <template>
-  <el-config-provider :locale="locale">
-    <router-view v-slot="{ Component }">
-      <keep-alive v-if="store.keepAlivePages[routeName]">
-        <component :is="Component" />
-      </keep-alive>
-      <component v-else :is="Component" />
-    </router-view>
-  </el-config-provider>
+	<el-config-provider :locale="i18nLocale" :button="config" :size="assemblySize">
+		<router-view></router-view>
+	</el-config-provider>
 </template>
+
+<script setup lang="ts">
+import { reactive, computed } from "vue";
+import { GlobalStore } from "@/store";
+
+// 配置element中英文
+import zhCn from "element-plus/es/locale/lang/zh-cn";
+import en from "element-plus/es/locale/lang/en";
+
+// 使用主题
+import { useTheme } from "@/hooks/useTheme";
+useTheme();
+
+const globalStore = GlobalStore();
+// 配置element按钮文字中间是否有空格
+const config = reactive({
+	autoInsertSpace: false
+});
+
+// element 语言配置
+const i18nLocale = computed(() => {
+	if (globalStore.language == "zh" || !globalStore.language) return zhCn;
+	if (globalStore.language == "en") return en;
+});
+console.log(i18nLocale.value);
+
+// 配置全局组件大小 (small/default(medium)/large)
+const assemblySize = computed((): string => globalStore.assemblySize);
+</script>
