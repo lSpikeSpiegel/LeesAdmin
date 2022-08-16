@@ -1,25 +1,47 @@
 <template>
 	<el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" size="large">
 		<el-form-item prop="username">
-			<el-input v-model="loginForm.username" placeholder="用户名：admin / user">
+			<el-input v-model="loginForm.username" :placeholder="$t('loginForm.username')" clearable>
 				<template #prefix>
-					<el-icon class="el-input__icon"><user /></el-icon>
+					<el-icon class="el-input__icon">
+						<user />
+					</el-icon>
 				</template>
 			</el-input>
 		</el-form-item>
 		<el-form-item prop="password">
-			<el-input type="password" v-model="loginForm.password" placeholder="密码：123456" show-password autocomplete="new-password">
+			<el-input
+				type="password"
+				v-model="loginForm.password"
+				:placeholder="$t('loginForm.password')"
+				show-password
+				autocomplete="new-password"
+			>
 				<template #prefix>
-					<el-icon class="el-input__icon"><lock /></el-icon>
+					<el-icon class="el-input__icon">
+						<lock />
+					</el-icon>
 				</template>
 			</el-input>
 		</el-form-item>
 	</el-form>
+
+	<mi-captcha
+		width="100%"
+		height="40px"
+		:themeColor="globalStore.themeConfig.primary"
+		bgColor="transparent"
+		:textColor="globalStore.themeConfig.primary"
+		modalBgColor="rgba(0,0,0,0.5)"
+		verify-action="v1/captcha/verification"
+		:verify-params="params.verify"
+	/>
+
 	<div class="login-btn">
-		<el-button :icon="CircleClose" round @click="resetForm(loginFormRef)" size="large">重置</el-button>
 		<el-button :icon="UserFilled" round @click="login(loginFormRef)" size="large" type="primary" :loading="loading">
-			登录
+			{{ $t("loginForm.login") }}
 		</el-button>
+		<el-button :icon="Edit" round @click="showSignup" size="large">{{ $t("loginForm.signup") }}</el-button>
 	</div>
 </template>
 
@@ -27,8 +49,8 @@
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { Login } from "@/api/interface";
-import { CircleClose, UserFilled } from "@element-plus/icons-vue";
-import type { ElForm } from "element-plus";
+import { Edit, UserFilled } from "@element-plus/icons-vue";
+import { ElForm } from "element-plus";
 import { ElMessage } from "element-plus";
 import { loginApi } from "@/api/modules/login";
 import { GlobalStore } from "@/store";
@@ -39,6 +61,11 @@ import md5 from "js-md5";
 const globalStore = GlobalStore();
 const menuStore = MenuStore();
 const tabStore = TabsStore();
+
+// 定义滑块验证
+const params = reactive({
+	verify: { key: null }
+});
 
 // 定义 formRef（校验规则）
 type FormInstance = InstanceType<typeof ElForm>;
@@ -58,9 +85,13 @@ const loading = ref<boolean>(false);
 const router = useRouter();
 // login
 const login = (formEl: FormInstance | undefined) => {
-	if (!formEl) return;
+	if (!formEl) {
+		return;
+	}
 	formEl.validate(async valid => {
-		if (!valid) return;
+		if (!valid) {
+			return;
+		}
 		loading.value = true;
 		try {
 			const requestLoginForm: Login.ReqLoginForm = {
@@ -82,10 +113,11 @@ const login = (formEl: FormInstance | undefined) => {
 	});
 };
 
-// resetForm
-const resetForm = (formEl: FormInstance | undefined) => {
-	if (!formEl) return;
-	formEl.resetFields();
+const emit = defineEmits(["signup"]);
+
+// showRegister
+const showSignup = () => {
+	emit("signup");
 };
 
 onMounted(() => {
@@ -93,7 +125,9 @@ onMounted(() => {
 	document.onkeydown = (e: any) => {
 		e = window.event || e;
 		if (e.code === "Enter" || e.code === "enter" || e.code === "NumpadEnter") {
-			if (loading.value) return;
+			if (loading.value) {
+				return;
+			}
 			login(loginFormRef.value);
 		}
 	};

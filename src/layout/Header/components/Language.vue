@@ -1,8 +1,8 @@
 <template>
 	<el-dropdown trigger="click" @command="handleSetLanguage">
 		<span>
-			<el-tooltip effect="dark" content="国际化" placement="bottom">
-				<i :class="'iconfont icon-zhongyingwen'" class="icon-style"></i>
+			<el-tooltip effect="dark" :content="$t('header.language')" placement="bottom">
+				<translate theme="outline" class="icon-style" fill="#333" />
 			</el-tooltip>
 		</span>
 		<template #dropdown>
@@ -18,6 +18,7 @@
 import { computed, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { GlobalStore } from "@/store";
+import { Translate } from "@icon-park/vue-next";
 import { getBrowserLang } from "@/utils/util";
 
 const i18n = useI18n();

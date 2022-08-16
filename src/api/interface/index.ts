@@ -32,6 +32,12 @@ export namespace Login {
 	export interface ResLogin {
 		access_token: string;
 	}
+	export interface ResAPI {
+		data: {
+			access_token?: string;
+			error?: string;
+		};
+	}
 	export interface ResAuthButtons {
 		[propName: string]: any;
 	}

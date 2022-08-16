@@ -15,3 +15,8 @@ dist
 .prettierrc.js
 /src/mock/*
 
+/build/
+/config/
+/dist/
+/src/utils/
+/src/router/*.js

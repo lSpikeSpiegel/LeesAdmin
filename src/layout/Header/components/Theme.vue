@@ -1,48 +1,48 @@
 <template>
 	<div>
-		<el-tooltip effect="dark" content="布局设置" placement="bottom">
-			<i :class="'iconfont icon-zhuti'" class="icon-style" @click="openDrawer"></i>
+		<el-tooltip effect="dark" :content="$t('header.layoutConfig')" placement="bottom">
+			<setting-web theme="outline" class="icon-style" @click="openDrawer" fill="#333" />
 		</el-tooltip>
-		<el-drawer v-model="drawerVisible" title="布局设置" size="300px">
+		<el-drawer v-model="drawerVisible" :title="$t('header.layoutConfig')" size="300px">
 			<el-divider class="divider" content-position="center">
 				<el-icon><ColdDrink /></el-icon>
-				全局主题
+				{{ $t("header.theme") }}
 			</el-divider>
 			<div class="theme-item">
-				<span>主题颜色</span>
+				<span> {{ $t("header.primary") }} </span>
 				<el-color-picker v-model="themeConfig.primary" :predefine="colorList" @change="changePrimary" />
 			</div>
 			<div class="theme-item">
-				<span>暗黑模式</span>
+				<span> {{ $t("header.darkMode") }} </span>
 				<SwitchDark></SwitchDark>
 			</div>
 			<div class="theme-item">
-				<span>灰色模式</span>
+				<span> {{ $t("header.greyMode") }} </span>
 				<el-switch v-model="themeConfig.isGrey" @change="changeGreyOrWeak($event, 'grey')" />
 			</div>
 			<div class="theme-item">
-				<span>色弱模式</span>
+				<span> {{ $t("header.weakMode") }} </span>
 				<el-switch v-model="themeConfig.isWeak" @change="changeGreyOrWeak($event, 'weak')" />
 			</div>
 			<br />
 			<el-divider class="divider" content-position="center">
 				<el-icon><Setting /></el-icon>
-				界面设置
+				{{ $t("header.uiSettings") }}
 			</el-divider>
 			<div class="theme-item">
-				<span>折叠菜单</span>
+				<span> {{ $t("header.collapse") }} </span>
 				<el-switch v-model="isCollapse" />
 			</div>
 			<div class="theme-item">
-				<span>面包屑导航</span>
+				<span> {{ $t("header.breadcrumb") }} </span>
 				<el-switch v-model="themeConfig.breadcrumb" />
 			</div>
 			<div class="theme-item">
-				<span>标签栏</span>
+				<span> {{ $t("header.tab") }} </span>
 				<el-switch v-model="themeConfig.tabs" />
 			</div>
 			<div class="theme-item">
-				<span>页脚</span>
+				<span> {{ $t("header.footer") }} </span>
 				<el-switch v-model="themeConfig.footer" />
 			</div>
 		</el-drawer>
@@ -50,6 +50,7 @@
 </template>
 
 <script setup lang="ts">
+import { SettingWeb } from "@icon-park/vue-next";
 import { ref, computed } from "vue";
 import { useTheme } from "@/hooks/useTheme";
 import SwitchDark from "@/components/SwitchDark/index.vue";

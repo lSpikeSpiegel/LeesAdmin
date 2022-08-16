@@ -1,15 +1,29 @@
-# @see: http://editorconfig.org
+`root = true`
 
-root = true
+`# 对所有文件有效 //[*js]只对js文件有效`
 
-[*] # 表示所有文件适用
-charset = utf-8 # 设置文件字符集为 utf-8
-end_of_line = lf # 控制换行类型(lf | cr | crlf)
-insert_final_newline = true # 始终在文件末尾插入一个新行
-indent_style = tab # 缩进风格（tab | space）
-indent_size = 2 # 缩进大小
-max_line_length = 130 # 最大行长度
+`[*]`
 
-[*.md] # 表示仅 md 文件适用以下规则
-max_line_length = off # 关闭最大行长度限制
-trim_trailing_whitespace = false # 关闭末尾空格修剪
+`#设置编码格式`
+
+`charset = utf-8`
+
+`#缩进类型 可选space和tab`
+
+`indent_style = space`
+
+`#缩进数量可选整数值2 or 4,或者tab`
+
+`indent_size = 2`
+
+`#换行符的格式`
+
+`end_of_line = lf`
+
+`# 是否在文件的最后插入一个空行 可选true和false`
+
+`insert_final_newline = true`
+
+`# 是否删除行尾的空格 可选择true和false`
+
+`trim_trailing_whitespace = true`

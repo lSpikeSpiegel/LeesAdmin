@@ -1,13 +1,12 @@
 .header {
 	box-sizing: border-box;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	@include sbFlex;
 	height: 55px;
 	padding: 0 15px;
 	background-color: #ffffff;
 	border-bottom: 1px solid #f6f6f6;
 	.header-lf {
+		@include centerFlex;
 		.collapse-icon {
 			margin-right: 20px;
 			font-size: 22px;
@@ -15,11 +14,10 @@
 		}
 	}
 	.header-ri {
+		@include centerFlex;
 		margin: 0 30px;
 		.header-icon {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
+			@include sbFlex;
 			width: 190px;
 			margin-right: 22px;
 			.icon-style {

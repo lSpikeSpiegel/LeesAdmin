@@ -5,6 +5,13 @@
 	align-items: $align;
 }
 
+@mixin sbFlex($direction: row, $wrap: nowrap, $align: center, $display: flex) {
+	display: $display;
+	flex-flow: $direction $wrap;
+	justify-content: space-between;
+	align-items: $align;
+}
+
 @mixin centerFlex($direction: row, $wrap: nowrap, $display: flex) {
 	display: $display;
 	flex-flow: $direction $wrap;

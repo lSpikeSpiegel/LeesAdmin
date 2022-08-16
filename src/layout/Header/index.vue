@@ -1,10 +1,10 @@
 <template>
 	<div class="header">
-		<div class="header-lf flx-center">
+		<div class="header-lf">
 			<CollapseIcon id="collapseIcon" />
 			<Breadcrumb id="breadcrumb" v-if="themeConfig.breadcrumb" />
 		</div>
-		<div class="header-ri flx-center">
+		<div class="header-ri">
 			<div class="header-icon">
 				<!-- Assembly size -->
 				<AssemblySize id="assemblySize" />
@@ -18,7 +18,7 @@
 				<Fullscreen id="fullscreen" />
 			</div>
 			<!-- User name -->
-			<span class="username">Geeker</span>
+			<span class="username">Lee</span>
 			<!-- Avatar -->
 			<Avatar />
 		</div>

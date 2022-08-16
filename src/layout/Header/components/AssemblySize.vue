@@ -1,14 +1,14 @@
 <template>
 	<el-dropdown trigger="click" @command="setAssemblySize">
 		<span>
-			<el-tooltip effect="dark" content="组件大小" placement="bottom">
-				<i :class="'iconfont icon-contentright'" class="icon-style"></i>
+			<el-tooltip effect="dark" :content="$t('header.componentSize')" placement="bottom">
+				<zoom-internal theme="outline" fill="#333" class="icon-style" />
 			</el-tooltip>
 		</span>
 		<template #dropdown>
 			<el-dropdown-menu>
 				<el-dropdown-item v-for="item in assemblySizeList" :key="item" :disabled="assemblySize === item" :command="item">
-					{{ assemblySizeListCh[item] }}
+					{{ $t(`header.${item}`) }}
 				</el-dropdown-item>
 			</el-dropdown-menu>
 		</template>
@@ -18,20 +18,16 @@
 <script setup lang="ts">
 import { reactive, computed } from "vue";
 import { GlobalStore } from "@/store";
-
+import { ZoomInternal } from "@icon-park/vue-next";
 const globalStore = GlobalStore();
 const assemblySize = computed((): string => globalStore.assemblySize);
-
-const assemblySizeListCh = reactive<{ [propName: string]: any }>({
-	default: "默认",
-	large: "大型",
-	small: "小型"
-});
 
 const assemblySizeList = reactive<string[]>(["default", "large", "small"]);
 
 const setAssemblySize = (item: string) => {
-	if (assemblySize.value === item) return;
+	if (assemblySize.value === item) {
+		return;
+	}
 	globalStore.setAssemblySizeSize(item);
 };
 </script>
